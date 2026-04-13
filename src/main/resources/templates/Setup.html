@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Set Master Password</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="page">
+    <div class="card small">
+        <h1>Password Vault</h1>
+        <p class="subtitle">Create your master password to initialize your vault.</p>
+
+        <h2>Set Master Password</h2>
+
+        <form action="/setup" method="post">
+            <div class="form-group">
+                <label>New Master Password</label>
+                <div class="password-input-group">
+                    <input type="password" name="newPassword" id="setupPassword" required>
+                    <button type="button" class="mini-button" onclick="toggleInputPassword('setupPassword', this)">Show</button>
+                </div>
+            </div>
+
+            <button type="submit">Save Password</button>
+        </form>
+
+        <p class="message-error">[[${error}]]</p>
+    </div>
+</div>
+
+<script>
+    function toggleInputPassword(inputId, button) {
+        const input = document.getElementById(inputId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            button.textContent = "Hide";
+        } else {
+            input.type = "password";
+            button.textContent = "Show";
+        }
+    }
+</script>
+</body>
+</html>

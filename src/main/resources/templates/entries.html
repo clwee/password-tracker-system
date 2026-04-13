@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Password Vault</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="page">
+    <div class="card">
+        <div class="top-bar">
+            <div>
+                <h1>Password Vault</h1>
+                <p class="subtitle">Securely manage your saved credentials in one clean workspace.</p>
+            </div>
+
+            <div class="header-actions">
+                <a class="button-link" href="/change-password">Update Master Password</a>
+                <a class="secondary-button" href="/lock">Lock Vault</a>
+            </div>
+        </div>
+
+        <div class="form-panel">
+            <h2>Add New Entry</h2>
+
+            <form action="/addEntry" method="post" class="inline-form">
+                <div class="form-group">
+                    <label>Service Name</label>
+                    <input type="text" name="serviceName" placeholder="e.g. Gmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="e.g. your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-input-group">
+                        <input type="password" name="password" id="entryPassword" placeholder="Enter password" required>
+                        <button type="button" class="mini-button" onclick="toggleInputPassword('entryPassword', this)">Show</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit">Add Entry</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-wrapper" th:if="${entries != null and !#lists.isEmpty(entries)}">
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Delete</th>
+                </tr>
+
+                <tr th:each="entry, stat : ${entries}">
+                    <td th:text="${entry.serviceName}"></td>
+                    <td th:text="${entry.username}"></td>
+                    <td>
+                        <div class="password-cell">
+                            <span class="password-text" th:id="'password-' + ${stat.index}">••••••••</span>
+                            <button
+                                type="button"
+                                class="mini-button"
+                                th:attr="onclick=|toggleStoredPassword('password-${stat.index}', '${entry.password}', this)|">
+                                Show
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <a class="delete-link" th:href="@{/deleteEntry(index=${stat.index})}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table-wrapper" th:if="${entries == null or #lists.isEmpty(entries)}">
+            <div class="empty-state">
+                No entries saved yet. Add your first credential above to begin building your vault.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleInputPassword(inputId, button) {
+        const input = document.getElementById(inputId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            button.textContent = "Hide";
+        } else {
+            input.type = "password";
+            button.textContent = "Show";
+        }
+    }
+
+    function toggleStoredPassword(elementId, realPassword, button) {
+        const passwordElement = document.getElementById(elementId);
+
+        if (passwordElement.textContent === "••••••••") {
+            passwordElement.textContent = realPassword;
+            button.textContent = "Hide";
+        } else {
+            passwordElement.textContent = "••••••••";
+            button.textContent = "Show";
+        }
+    }
+</script>
+</body>
+</html>

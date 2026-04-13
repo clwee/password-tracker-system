@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unlock Vault</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="page">
+    <div class="card small">
+        <h1>Password Vault</h1>
+        <p class="subtitle">Enter your master password to unlock your saved credentials.</p>
+
+        <h2>Unlock Vault</h2>
+
+        <form action="/unlock" method="post">
+            <div class="form-group">
+                <label>Master Passcode</label>
+                <div class="password-input-group">
+                    <input type="password" name="passcode" id="unlockPassword" required>
+                    <button type="button" class="mini-button" onclick="toggleInputPassword('unlockPassword', this)">Show</button>
+                </div>
+            </div>
+
+            <button type="submit">Unlock</button>
+        </form>
+
+        <p class="message-error">[[${error}]]</p>
+        <p class="message-success">[[${message}]]</p>
+    </div>
+</div>
+
+<script>
+    function toggleInputPassword(inputId, button) {
+        const input = document.getElementById(inputId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            button.textContent = "Hide";
+        } else {
+            input.type = "password";
+            button.textContent = "Show";
+        }
+    }
+</script>
+</body>
+</html>
