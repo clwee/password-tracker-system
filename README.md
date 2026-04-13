@@ -1,18 +1,17 @@
 # Password Tracker System
 
-This project is a simple password tracking web application built using Java and Spring Boot.
+This project is a simple web-based password tracking application built using Java and Spring Boot.
 
-The program allows users to:
+Features:
 
-- Set a master password (first-time setup)
-- Unlock the vault
-- Add password entries
-- View saved credentials
+- First-time master password setup
+- Unlock vault using master password
+- Add credential entries
+- View stored credentials
 - Delete entries
-- Change the master password
-- Lock the vault
-
-Password data is stored locally using text files.
+- Change master password after login
+- Lock vault
+- Show / hide password while typing
 
 --------------------------------------
 
@@ -20,25 +19,25 @@ How to Run the Program
 
 Step 1:
 
-Open terminal inside the project folder:
-
-password-tracker-system
+Download the project ZIP from GitHub and extract it.
 
 Step 2:
 
-Move into the application folder:
+Open a terminal inside the folder that contains:
 
-cd password-tracker-system
+pom.xml
+mvnw.cmd
+src
 
 Step 3:
 
-Run the program:
+Run the application:
 
 .\mvnw.cmd spring-boot:run
 
 Step 4:
 
-Open browser:
+Open your browser and go to:
 
 http://localhost:8080
 
@@ -46,4 +45,4 @@ http://localhost:8080
 
 Requirements
 
-Java JDK installed (JDK 17 or newer)
+Java JDK 17 or newer
